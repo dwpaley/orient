@@ -5,12 +5,12 @@ from subprocess import Popen, PIPE
 from shutil import copyfile
 from sys import argv
 
-def main(fileName):
+def main(fileName, ntrial):
     trMat = metric.make_inv_cart_mat(fileName)
     CLtext = ['shelxl', fileName.rstrip('.ins') + '_orient']
     best, n, count = 1, 0, 0
 
-    while 1:
+    for n in range(ntrial):
         v1, v3 = randpts.makeVectors()
         proc_file.proc_file(fileName, v1, v3, trMat)
         p = Popen(CLtext, stdout=PIPE, stderr=PIPE, universal_newlines=True)
@@ -24,7 +24,7 @@ def main(fileName):
         count += 1
         print('Trial {}\nCurrent R1={}\nBest R1={}\n'.format(count, r1, best))
 
-main(argv[1])
+main(argv[1], int(argv[2]))
 
 
 
