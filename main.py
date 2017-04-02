@@ -1,3 +1,5 @@
+#!/usr/local/bin/python3
+
 import proc_file, metric, randpts
 from subprocess import Popen, PIPE
 from shutil import copyfile
