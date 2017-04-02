@@ -8,7 +8,7 @@ from sys import argv
 def main(fileName):
     trMat = metric.make_inv_cart_mat(fileName)
     CLtext = ['shelxl', fileName.rstrip('.ins') + '_orient']
-    best, n = 1, 0
+    best, n, count = 1, 0, 0
 
     while 1:
         v1, v3 = randpts.makeVectors()
@@ -21,7 +21,8 @@ def main(fileName):
             copyfile(fileName.rstrip('.ins') + '_orient.ins',
                     fileName + '.o{}'.format(n))
             n += 1
-        print('Current R1={}\nBest R1={}\n'.format(r1, best))
+        count += 1
+        print('Trial {}\nCurrent R1={}\nBest R1={}\n'.format(count, r1, best))
 
 main(argv[1])
 
