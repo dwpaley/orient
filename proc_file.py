@@ -9,13 +9,11 @@ def proc_file(fileName, v1, v2, trMat):
             dum1 = cent + np.dot(trMat, v1)
             dum2 = cent + np.dot(trMat, v2)
         if 'XXXX' in line:
-            line = (line[:line.find('XXXX')] + 
-                    ' {:.4f} {:.4f} {:.4f} 10.0 10.01\n'.format(
-                    *dum1))
+            line = line.replace('XXXX',' {:.4f} {:.4f} {:.4f} 10.0 10.01\n'
+                    .format(*dum1))
         if 'YYYY' in line:
-            line = (line[:line.find('YYYY')] +
-                ' {:.4f} {:.4f} {:.4f} 10.0 10.01\n'.format(
-                    *dum2))
+            line = line.replace('YYYY',' {:.4f} {:.4f} {:.4f} 10.0 10.01\n'
+                    .format(*dum2))
         outFile.write(line)
     inFile.close()
     outFile.close()
