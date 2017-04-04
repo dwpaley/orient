@@ -1,7 +1,7 @@
 import numpy as np
 from math import cos, radians, acos, sin, sqrt
 
-def make_inv_cart_mat(fileName):
+def make_matrices(fileName):
     '''This makes the inverse of the Cartesian basis transformation described
     on Shmueli p. 235'''
     with open(fileName, 'r') as inFile:
@@ -21,10 +21,12 @@ def make_inv_cart_mat(fileName):
     best = acos(gInv[0][2]/ast/cst)
     gast = acos(gInv[0][1]/ast/bst)
 
+    #cartMat transforms xyz to cartesian coordinates
+    #invCartMat transforms cartesian to xyz
     cartMat = np.array([[a, b*cga,              c*cbe],
                         [0, b*sin(radians(ga)), -c*sin(radians(be))*cos(alst)],
                         [0, 0,                  1/cst]])
     invCartMat = np.linalg.inv(cartMat)
 
-    return invCartMat
+    return (cartMat, invCartMat)
 
