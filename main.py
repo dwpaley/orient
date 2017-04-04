@@ -1,6 +1,6 @@
 #!/usr/local/bin/python3
 
-import proc_file, metric, randpts
+import proc_file, metric
 from subprocess import Popen, PIPE
 from shutil import copyfile
 from sys import argv
@@ -11,8 +11,7 @@ def main(fileName, ntrial):
     best, n, count = 1, 0, 0
 
     for n in range(ntrial):
-        v1, v3 = randpts.makeVectors()
-        proc_file.proc_file(fileName, v1, v3, trMat)
+        proc_file.proc_file(fileName, trMat)
         p = Popen(CLtext, stdout=PIPE, stderr=PIPE, universal_newlines=True)
         stdout, stderr = p.communicate()
         r1 = float(stdout.split('\n')[-11][7:13])
