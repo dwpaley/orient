@@ -8,7 +8,7 @@ def make_matrices(fileName):
         inst = ''
         while inst.lower() != 'cell':
             line = inFile.readline()
-            inst = line.split()[0]
+            inst = line.split()[0] if line.split() else ''
     a, b, c, al, be, ga = [float(x) for x in line.split()[2:8]]
     cal, cbe, cga = [cos(radians(angle)) for angle in (al, be, ga)]
 
