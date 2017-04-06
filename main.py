@@ -1,18 +1,17 @@
 #!/usr/local/bin/python3
 
-import proc_file, metric, randpts
+import proc_file, metric
 from subprocess import Popen, PIPE
 from shutil import copyfile
 from sys import argv
 
 def main(fileName, ntrial):
-    trMat = metric.make_inv_cart_mat(fileName)
+    matrices = metric.make_matrices(fileName)
     CLtext = ['shelxl', fileName.rstrip('.ins') + '_orient']
     best, n, count = 1, 0, 0
 
     for n in range(ntrial):
-        v1, v3 = randpts.makeVectors()
-        proc_file.proc_file(fileName, v1, v3, trMat)
+        proc_file.proc_file(fileName, matrices)
         p = Popen(CLtext, stdout=PIPE, stderr=PIPE, universal_newlines=True)
         stdout, stderr = p.communicate()
         r1 = float(stdout.split('\n')[-11][7:13])
