@@ -1,5 +1,4 @@
 #!/usr/local/bin/python3
-import pdb
 
 import proc_file, metric
 from subprocess import Popen, PIPE
@@ -13,8 +12,7 @@ def main(fileName, ntrial):
     CLtext = ['shelxl', fileName.rstrip('.ins') + '_orient']
     best, n, count = 1, 0, 0
 
-    pdb.set_trace()
-    for n in range(ntrial):
+    for trial in range(ntrial):
         proc_file.proc_file(fileName, matrices)
         p = Popen(CLtext, stdout=PIPE, stderr=PIPE, universal_newlines=True)
         stdout, stderr = p.communicate()
