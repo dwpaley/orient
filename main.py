@@ -6,6 +6,8 @@ from shutil import copyfile
 from sys import argv
 
 def main(fileName, ntrial):
+    copyfile(fileName.rstrip('.ins') + '.hkl', 
+            fileName.rstrip('.ins') + '_orient.hkl')
     matrices = metric.make_matrices(fileName)
     CLtext = ['shelxl', fileName.rstrip('.ins') + '_orient']
     best, n, count = 1, 0, 0
