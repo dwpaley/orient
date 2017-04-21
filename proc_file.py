@@ -4,8 +4,8 @@ import randpts
 def proc_file(fileName, matrices):
     cartMat, invCartMat = matrices
     v1 = randpts.makeRand() #v1 is a cartesian unit vector
-    inFile = open(fileName, 'r')
-    outFile = open(fileName.rstrip('.ins') + '_orient.ins', 'w')
+    inFile = open(fileName + '.ins', 'r')
+    outFile = open(fileName + '_orient.ins', 'w')
     for line in inFile.readlines():
         if line[0:4] == 'CENT':
             cent = np.array([float(x) for x in line.split()[2:5]])
