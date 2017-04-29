@@ -1,21 +1,24 @@
 #!/usr/local/bin/python3
 
 import proc_file, metric
-from subprocess import Popen, PIPE
+from subprocess import getoutput
 from shutil import copyfile
 from sys import argv
+from re import compile
 
 def main(fileName, ntrial):
     copyfile(fileName + '.hkl', fileName + '_orient.hkl')
     matrices = metric.make_matrices(fileName + '.ins')
-    CLtext = ['shelxl', fileName + '_orient']
+
+    CLtext = 'shelxl {}_orient'.format(fileName)
+    r1SearchExp = compile(r'R1 = +([0-9.]+) +for')
+    
     best, n = 1, 0
 
     for tr in range(ntrial):
         proc_file.proc_file(fileName, matrices)
-        p = Popen(CLtext, stdout=PIPE, stderr=PIPE, universal_newlines=True)
-        stdout, stderr = p.communicate()
-        r1 = float(stdout.split('\n')[-11][7:13])
+        shelxlOut = getoutput(CLtext)
+        r1 = float(r1SearchExp.search(shelxlOut).group(1))
         if r1 < best:
             best = r1
             copyfile(fileName + '_orient.ins', fileName + '.o{}'.format(n))
