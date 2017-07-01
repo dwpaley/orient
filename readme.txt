@@ -21,7 +21,7 @@ afix 176
 part n 10.0
 CENT 1 x y z 10.0 10.02
 dum1 1 XXXX
-dum2 1 XXXX
+dum2 1 YYYY
 part n sof
 C1 1 0 0 0 sof .05
 C2 1 0 0 0 sof .05
@@ -43,7 +43,7 @@ afix 176
 part n 10.0
 CENT 1 x y z 10.0 10.02
 PIVT 1 x y z 10.0 10.02
-dum2 1 XXXX
+dum2 1 YYYY
 part n sof
 C1 1 0 0 0 sof .05
 C2 1 0 0 0 sof .05
