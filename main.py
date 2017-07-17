@@ -18,7 +18,10 @@ def main(fileName, ntrial):
     for tr in range(ntrial):
         proc_file.proc_file(fileName, matrices)
         shelxlOut = getoutput(CLtext)
-        r1 = float(r1SearchExp.search(shelxlOut).group(1))
+        try:
+            r1 = float(r1SearchExp.search(shelxlOut).group(1))
+        except AttributeError:
+            r1 = 1
         if r1 < best:
             best = r1
             copyfile(fileName + '_orient.ins', fileName + '.o{}'.format(n))
