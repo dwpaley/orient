@@ -1,12 +1,31 @@
 import numpy as np
 import randpts
 
-def proc_file(fileName, matrices):
+def proc_file(fileName, matrices, translateScale=0):
     cartMat, invCartMat = matrices
     v1 = randpts.makeRand() #v1 is a cartesian unit vector
     inFile = open(fileName + '.ins', 'r')
     outFile = open(fileName + '_orient.ins', 'w')
+
+    lineCounter = 0
+
+
+
     for line in inFile.readlines():
+
+        # This applies a random shift to the search fragment (achieved by
+        # shifting the 3 dummy atoms away from the centroid of the frag)
+        if lineCounter > 0: 
+            lineList = line.split()
+            for i in range(2,5): 
+                lineList[i] = float(lineList[i])
+            line = '{} {} {:.6f} {:.6f} {:.6f}\n'.format(
+                    lineList[0], lineList[1], *(lineList[2:5] + tVector))
+            lineCounter -= 1
+        if line[0:4].upper() == 'FRAG':
+            lineCounter = 3
+            tVector = randpts.makeRand() * translateScale * np.random.rand()
+
         if line[0:4] == 'CENT':
             cent = np.array([float(x) for x in line.split()[2:5]])
             #cent is an xyz point 
