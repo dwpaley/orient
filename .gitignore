@@ -1,3 +1,4 @@
+.DS_Store
 *.swp
 .olex/
 __pycache__/
