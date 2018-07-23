@@ -29,7 +29,7 @@ def parse_instructions(line):
     parser.add_argument('z', type=float, default=None) 
     parser.add_argument('-t', '--trials', default=100, type=int)
     parser.add_argument('-s', '--shift', default=0, type=float)
-    parser.add_argument('-f', '--frag', default=17)
+    parser.add_argument('-f', '--frag', type=int, default=17)
     parser.add_argument('-u', '--uiso', type=float, default=0.05)
     args = parser.parse_args(line.split()[1:])
     return args
@@ -64,7 +64,7 @@ def proc_frag(line, inFile):
     Reads further lines from inFile, writing them to outFile, until it reaches
     FEND. Saves the whole FRAG...FEND block to a dictionary fragDict.
     '''
-    fragNumber = line.split()[1]
+    fragNumber = int(line.split()[1])
     fragLines = []
     while True:
         fragLines.append(line)
