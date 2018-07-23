@@ -30,6 +30,7 @@ def parse_instructions(line):
     parser.add_argument('-t', '--trials', default=100, type=int)
     parser.add_argument('-s', '--shift', default=0, type=float)
     parser.add_argument('-f', '--frag', default=17)
+    parser.add_argument('-u', '--uiso', type=float, default=0.05)
     args = parser.parse_args(line.split()[1:])
     return args
 
@@ -107,7 +108,7 @@ def proc_orient(line, inFile, fragDict):
         atomMatch = atomRE.match(line)
         if atomMatch and not line[0].upper() in shelxWords: 
             atomMatchList.append(atomMatch)
-            line = atomMatch.group(1) + ' 0 0 0\n'
+            line = atomMatch.group(1) + ' 0 0 0 11 {}\n'.format(orientArgs.uiso)
         if line.lower().startswith('!!oend'):
             orientLines.append('afix 0\n')
             break
