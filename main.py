@@ -22,10 +22,11 @@ Please modify your ins file and run again.
 '''
 
 startText = '''
-Fragment: \t\t{frag}
-Centroid xyz: \t\t{x:.3f} {y:.3f} {z:.3f}
-Trials: \t\t{trials}
-Max. translation:\t{shift} A
+Fragment: \t\t\t{frag}
+Centroid xyz: \t\t\t{x:.3f} {y:.3f} {z:.3f}
+Trials: \t\t\t{trials}
+Max. translation:\t\t{shift} A
+Uiso for oriented fragment: \t{uiso}
 
 ctrl-C to end at any time
 
