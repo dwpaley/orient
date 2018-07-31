@@ -91,7 +91,7 @@ def proc_orient(line, inFile, fragDict):
     orientArgs = parse_instructions(line)
     fragLines = make_frag(fragDict[orientArgs.frag])
 
-    dummyAtoms = ['afix 99{}\n'.format(orientArgs[afix]),
+    dummyAtoms = ['afix 99{}\n'.format(orientArgs.afix),
             'REM !! To remove the dummy atoms while preserving the rest of\n'
             'REM !! the model, simply refine this model in ShelXL and delete\n'
             'REM !! the lines from here through "PERP 1 ..." from the \n'
