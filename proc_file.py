@@ -31,6 +31,7 @@ def parse_instructions(line):
     parser.add_argument('-s', '--shift', default=0, type=float)
     parser.add_argument('-f', '--frag', type=int, default=17)
     parser.add_argument('-u', '--uiso', type=float, default=0.05)
+    parser.add_argument('-a', '--afix', default='6')
     args = parser.parse_args(line.split()[1:])
     return args
 
@@ -90,7 +91,7 @@ def proc_orient(line, inFile, fragDict):
     orientArgs = parse_instructions(line)
     fragLines = make_frag(fragDict[orientArgs.frag])
 
-    dummyAtoms = ['afix 996\n',
+    dummyAtoms = ['afix 99{}\n'.format(orientArgs.afix),
             'REM !! To remove the dummy atoms while preserving the rest of\n'
             'REM !! the model, simply refine this model in ShelXL and delete\n'
             'REM !! the lines from here through "PERP 1 ..." from the \n'

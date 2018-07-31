@@ -27,6 +27,7 @@ Centroid xyz: \t\t\t{x:.3f} {y:.3f} {z:.3f}
 Trials: \t\t\t{trials}
 Max. translation:\t\t{shift} A
 Uiso for oriented fragment: \t{uiso}
+Afix code for fragment: \t{frag}{afix}
 
 ctrl-C to end at any time
 
