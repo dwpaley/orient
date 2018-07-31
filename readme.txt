@@ -24,7 +24,7 @@ set on a PART line. The coordinates may be filled with zeroes.
 
 -Surrounding these atoms, add instructions for the Orient run. Start with:
 
-!!orient x y z [--shift=0] [--trials=100] [--frag=17]
+!!orient x y z [--shift=0] [--trials=100] [--frag=17] [--uiso=.05] [--afix=6]
 
 and end with:
 
@@ -38,7 +38,11 @@ The optional arguments are the following: shift is a random translational shift
 of n angstroms (default 0) in case the centroid is not known accurately. 
 Trials is the number of random orientations to test. Frag is the number of the 
 FRAG fragment that will be oriented. (This may be changed in case you are using
-other FRAG fragments at the same time.)
+other FRAG fragments at the same time.) Uiso is the isotropic adp for each atom
+in the search fragment and may be set to a free variable, i.e. -u21, to set a 
+group isotropic ADP. Afix is the /n/ component of the AFIX code that will be
+used for the search fragment. The default, 6, gives a rigid-body refinement, 
+but 0 may be useful for a flexible fragment (maybe with restraints).
 
 The number of trials needed depends on the size of the search fragment, the
 point symmetry of the fragment, and the point symmetry of its crystallographic
