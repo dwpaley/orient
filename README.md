@@ -127,3 +127,7 @@ Contact the author at dwp2111@columbia.edu.
 This program is licensed under the GNU General Public License and is free for
 anyone to use, copy, or modify. It may not be incorporated into proprietary
 software. The full license is included in the file license.txt.
+
+## Acknowlegement
+
+Charlene Tsay is acknowledged gratefully for testing.
