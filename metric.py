@@ -1,5 +1,4 @@
-from numpy import array
-from numpy.linalg import inv
+import numpy as np
 from math import cos, radians, acos, sin, sqrt
 
 def make_matrices(fileName):
@@ -13,10 +12,10 @@ def make_matrices(fileName):
     a, b, c, al, be, ga = [float(x) for x in line.split()[2:8]]
     cal, cbe, cga = [cos(radians(angle)) for angle in (al, be, ga)]
 
-    gij = array([[a**2, a*b*cga, a*c*cbe],
+    gij = np.array([[a**2, a*b*cga, a*c*cbe],
                     [b*a*cga, b**2, b*c*cal],
                     [c*a*cbe, c*b*cal, c**2]])
-    gInv = inv(gij)
+    gInv = np.linalg.inv(gij)
     ast, bst, cst = [sqrt(gInv[i][i]) for i in range(3)]
     alst = acos(gInv[1][2]/bst/cst)
     best = acos(gInv[0][2]/ast/cst)
@@ -24,10 +23,10 @@ def make_matrices(fileName):
 
     #cartMat transforms xyz to cartesian coordinates
     #invCartMat transforms cartesian to xyz
-    cartMat = array([[a, b*cga,              c*cbe],
+    cartMat = np.array([[a, b*cga,              c*cbe],
                         [0, b*sin(radians(ga)), -c*sin(radians(be))*cos(alst)],
                         [0, 0,                  1/cst]])
-    invCartMat = inv(cartMat)
+    invCartMat = np.linalg.inv(cartMat)
 
     return (cartMat, invCartMat)
 

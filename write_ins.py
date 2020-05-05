@@ -1,6 +1,5 @@
 import randpts
-from numpy import dot
-from numpy.random import rand
+import numpy as np
 
 def write_ins(template, args, matrices, fileName):
     '''
@@ -10,11 +9,11 @@ def write_ins(template, args, matrices, fileName):
     with open(fileName+'_or.ins', 'w') as outFile:
         cartMat, invCartMat = matrices #transform to and from a Cartesian basis
         v1, v2 = randpts.makeVectors() #these are perp., cartesian, unit vectors
-        shift = dot(invCartMat, 
-            (args.shift * randpts.makeRand() * rand()))
+        shift = np.dot(invCartMat, 
+            (args.shift * randpts.makeRand() * np.random.rand()))
         cent = args.cent + shift
-        pivt = cent + dot(invCartMat, v1)
-        perp = cent + dot(invCartMat, v2)
+        pivt = cent + np.dot(invCartMat, v1)
+        perp = cent + np.dot(invCartMat, v2)
         
         for line in template:
             if 'cent_xyz' in line:

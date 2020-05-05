@@ -1,11 +1,10 @@
+import numpy as np
 import randpts
-from argparse import ArgumentParser
-from numpy import zeros, mean, array
-from numpy.linalg import norm
-from re import compile as re_compile
+import argparse
+import re
+import pdb
 
-
-atomRE = re_compile(
+atomRE = re.compile(
         r'([A-Za-z]\S*\s+\d+)\s+' #atom name and sfac number
         r'([-0-9.]+)\s+([-0-9.]+)\s+([-0-9.]+).*') #x, y, z
 shelxWords = ['ABIN', 'ACTA', 'AFIX', 'ANIS', 'ANSC', 'ANSR', 'BASF', 
@@ -24,7 +23,7 @@ def parse_instructions(line):
     Parses a line such as '!!orient 0 0 0 --shift=2 --trials=7200 --frag=17'
     and returns a Namespace of all the arguments.
     '''
-    parser=ArgumentParser()
+    parser=argparse.ArgumentParser()
     parser.add_argument('x', type=float, default=None)
     parser.add_argument('y', type=float, default=None)
     parser.add_argument('z', type=float, default=None) 
@@ -45,10 +44,10 @@ def make_frag(lines):
     and returns the new FRAG block as a list of strings.
     '''
 
-    xyzArray = zeros(shape=(len(lines)-2, 3))
+    xyzArray = np.zeros(shape=(len(lines)-2, 3))
     for i in range(len(lines)-2):
         xyzArray[i] = lines[i+1].split()[2:5]
-    cent = mean(xyzArray, axis=0)
+    cent = np.mean(xyzArray, axis=0)
     dum1 = cent + [1,0,0]
     dum2 = cent + [0,1,0]
 
@@ -122,13 +121,13 @@ def proc_orient(line, inFile, fragDict):
     # If the centroid is on 0,0,0 then we nudge it slightly so that ShelXL
     # treats it as a real position.
     if orientArgs.x is not None: 
-        cent = array([orientArgs.x, orientArgs.y, orientArgs.z])
+        cent = np.array([orientArgs.x, orientArgs.y, orientArgs.z])
     else:
-        xyzArray = zeros(shape=(len(atomMatchList), 3))
+        xyzArray = np.zeros(shape=(len(atomMatchList), 3))
         for i in range(len(atomMatchList)):
             xyzArray[i] = [atomMatchList[i].group(j) for j in range(2, 5)]
-        cent = mean(xyzArray, axis=0)
-    if norm(cent) < 0.001: cent += [.001, .001, .001]
+        cent = np.mean(xyzArray, axis=0)
+    if np.linalg.norm(cent) < 0.001: cent += [.001, .001, .001]
     orientArgs.cent = cent
 
 
