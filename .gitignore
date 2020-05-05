@@ -1,4 +1,7 @@
-test/cluster_or.*
+build/
+dist/
+*.spec
+test/*_or.*
 .DS_Store
 *.swp
 .olex/
