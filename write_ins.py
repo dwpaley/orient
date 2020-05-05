@@ -1,5 +1,6 @@
 import randpts
-import numpy as np
+from linalg import dot, mat_vec_3_product
+from random import random
 
 def write_ins(template, args, matrices, fileName):
     '''
@@ -9,11 +10,12 @@ def write_ins(template, args, matrices, fileName):
     with open(fileName+'_or.ins', 'w') as outFile:
         cartMat, invCartMat = matrices #transform to and from a Cartesian basis
         v1, v2 = randpts.makeVectors() #these are perp., cartesian, unit vectors
-        shift = np.dot(invCartMat, 
-            (args.shift * randpts.makeRand() * np.random.rand()))
+        shift_multiplier = random()
+        shift_cart = [args.shift * shift_multiplier * x for x in randpts.makeRand()]
+        shift = mat_vec_3_product(invCartMat, shift_cart)
         cent = args.cent + shift
-        pivt = cent + np.dot(invCartMat, v1)
-        perp = cent + np.dot(invCartMat, v2)
+        pivt = cent + mat_vec_3_product(invCartMat, v1)
+        perp = cent + mat_vec_3_product(invCartMat, v2)
         
         for line in template:
             if 'cent_xyz' in line:
