@@ -60,8 +60,14 @@ def cleanup(fileName, CLtext):
 
 
 def main(fileName):
+    if 'CRYSTAL' in subprocess.getoutput('shelxl'):
+        CLtext = 'shelxl {}_or'.format(fileName)
+    elif 'CRYSTAL' in subprocess.getoutput('xl'):
+        CLtext = 'xl {}_or'.format(fileName)
+    else:
+        print("Could not find ShelXL executable. Tried 'shelxl' and 'xl'.")
+        exit()
     shutil.copyfile(fileName + '.hkl', fileName + '_or.hkl')
-    CLtext = 'shelxl {}_or'.format(fileName)
     r1SearchExp = re.compile(r'R1 = +([0-9.]+) +for')
 
     matrices = metric.make_matrices(fileName + '.ins') 
