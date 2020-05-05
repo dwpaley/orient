@@ -6,11 +6,30 @@ orientation that gives the best R1 is saved.
 
 ## Installation
 
-Copy all files and place a link to orient.py in your system path:
+### Binary files
+
+Download the correct version for your operating system:
+
+* [Windows (64-bit)](https://github.com/dwpaley/orient/raw/master/bin/win64/orient.exe)
+* [OSX](https://github.com/dwpaley/orient/raw/master/bin/osx/orient)
+* [Ubuntu](https://github.com/dwpaley/orient/raw/master/bin/ubuntu1604/orient)
+
+Place the executable in the system path. The directory containing your ShelXL executable
+might be convenient.
+
+Optionally, a test structure is available here: [cluster.ins](https://github.com/dwpaley/orient/raw/master/test/cluster.ins)
+[cluster.hkl](https://github.com/dwpaley/orient/raw/master/test/cluster.hkl). Place these files anywhere and call Orient from
+your command line: `$ orient cluster`. You should see 200 ShelXL trials. A correct orientation will give R1 ~3.6%.
+
+The executables were compiled on Windows 10 Home, MacOS 10.14.6, and Ubuntu 16.04 respectively. Please contact the author
+with any problems running them or for other platforms to add.
+
+### Python source code
 
 ```
 $ git clone https://github.com/dwpaley/orient
-$ ln -s $PWD/orient.py /usr/local/bin/orient
+$ chmod +x orient/orient.py
+$ ln -s $PWD/orient/orient.py /usr/local/bin/orient
 ```
 
 ## Usage
@@ -41,7 +60,9 @@ and end with:
 
 `!!oend`
 
-The arguments x, y, and z give the centroid of the orient fragment.
+The arguments x, y, and z give the centroid of the orient fragment. If they are
+omitted, the current centroid of the atoms between `!!orient` and `!!oend` is
+used.
 
 The optional arguments are the following: shift is a random translational shift 
 of n angstroms (default 0) in case the centroid is not known accurately. 
@@ -68,8 +89,9 @@ Set a cgls refinement with a small number of cycles; 10 typically works well.
 Besides the centroid coordinates, it is often fine to omit the other run
 parameters and use the defaults.
 
-The following lines, when added to an ins file and called with $ orient <name>,
-will run 30 trials to orient a toluene molecule on xyz = 0.5 0.5 0.5.
+The following lines, when added to an ins file and called with `$ orient <name>`,
+will run 30 trials to orient a toluene molecule on the inversion center 
+xyz = 0.5 0.5 0.5.
 
 ```
 FRAG 17
