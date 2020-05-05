@@ -1,5 +1,5 @@
 import randpts
-from linalg import dot, mat_vec_3_product
+from linalg import dot, mat_vec_3_product, vec_sum
 from random import random
 
 def write_ins(template, args, matrices, fileName):
@@ -13,9 +13,9 @@ def write_ins(template, args, matrices, fileName):
         shift_multiplier = random()
         shift_cart = [args.shift * shift_multiplier * x for x in randpts.makeRand()]
         shift = mat_vec_3_product(invCartMat, shift_cart)
-        cent = args.cent + shift
-        pivt = cent + mat_vec_3_product(invCartMat, v1)
-        perp = cent + mat_vec_3_product(invCartMat, v2)
+        cent = vec_sum(args.cent, shift)
+        pivt = vec_sum(cent, mat_vec_3_product(invCartMat, v1))
+        perp = vec_sum(cent, mat_vec_3_product(invCartMat, v2))
         
         for line in template:
             if 'cent_xyz' in line:

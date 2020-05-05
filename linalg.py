@@ -1,4 +1,5 @@
 from math import sqrt
+
 def norm(vec):
   return sqrt(sum([x**2 for x in vec]))
 
@@ -39,4 +40,21 @@ def mat_vec_3_product(m, v):
   r1 = sum([x*y for x, y in zip(m[1], v)])
   r2 = sum([x*y for x, y in zip(m[2], v)])
   return [r0, r1, r2]
+
+def centroid(vecs):
+  '''vecs is a list of lists'''
+  result = []
+  for i in range(len(vecs[0])):
+    elements = [v[i] for v in vecs]
+    mean = sum(elements) / len(elements)
+    result.append(mean)
+  return result
+
+def vec_sum(v1, v2):
+  result = []
+  for i in range(len(v1)):
+    result.append(v1[i] + v2[i])
+  return result
+
+
 
