@@ -100,8 +100,8 @@ if __name__ == '__main__':
         print('\nUsage:\n\n\t$ orient <name> \n\nto process <name>.ins. For '
                 'full documentation: \n\n\t$ orient --help')
     elif '--help' in sys.argv:
-        with open('readme.txt') as f:
-            print(f.read()) 
+        import README
+        print(README.text)
     else:
         main(sys.argv[1])
 
