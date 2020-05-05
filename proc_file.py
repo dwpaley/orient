@@ -24,9 +24,9 @@ def parse_instructions(line):
     and returns a Namespace of all the arguments.
     '''
     parser=argparse.ArgumentParser()
-    parser.add_argument('x', type=float, default=None)
-    parser.add_argument('y', type=float, default=None)
-    parser.add_argument('z', type=float, default=None) 
+    parser.add_argument('x', type=float, default=None, nargs='?')
+    parser.add_argument('y', type=float, default=None, nargs='?')
+    parser.add_argument('z', type=float, default=None, nargs='?') 
     parser.add_argument('-t', '--trials', default=100, type=int)
     parser.add_argument('-s', '--shift', default=0, type=float)
     parser.add_argument('-f', '--frag', type=int, default=17)
@@ -125,9 +125,10 @@ def proc_orient(line, inFile, fragDict):
     else:
         xyzArray = [[0,0,0] for i in range(len(atomMatchList))]
         for i in range(len(atomMatchList)):
-            xyzArray[i] = [atomMatchList[i].group(j) for j in range(2, 5)]
+            xyzArray[i] = [float(atomMatchList[i].group(j)) for j in range(2, 5)]
         cent = centroid(xyzArray)
     if norm(cent) < 0.001: cent = vec_sum(cent, [.001, .001, .001])
+    orientArgs.x, orientArgs.y, orientArgs.z = cent[0], cent[1], cent[2]
     orientArgs.cent = cent
 
 
