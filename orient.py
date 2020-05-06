@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3
+#!/usr/bin/env python3
 
 import proc_file, metric, write_ins
 import subprocess, shutil, sys, re, tempfile 
