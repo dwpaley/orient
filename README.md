@@ -121,7 +121,7 @@ resi 0
 
 ## Contact
 Daniel W. Paley, Columbia Nano Initiative (Columbia University), 2018. 
-Contact the author at dwp2111@columbia.edu.
+Contact the author at dwpaley@gmail.com
 
 ## License
 This program is licensed under the GNU General Public License and is free for
